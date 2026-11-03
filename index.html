@@ -284,6 +284,45 @@ textarea.copy{width:100%;min-height:160px;border:0;border-radius:var(--radius-md
 .empty-bp .app-ic{width:64px;height:64px;border-radius:18px;margin:0 auto var(--space-4)}
 .empty-bp .app-ic svg{width:32px;height:32px}
 .dot-hit{fill:transparent;cursor:pointer}
+/* Ausdruck */
+#report{display:none}
+@media print{
+  @page{size:A4;margin:14mm 12mm 16mm}
+  html,body{background:#fff!important}
+  body>*:not(#report){display:none!important}
+  #report{display:block;color:#000;font:10.5pt/1.4 var(--font-sans);-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  #report *{animation:none!important;transition:none!important}
+}
+.rp-head{display:flex;justify-content:space-between;align-items:flex-end;border-bottom:2px solid #0b3d91;padding-bottom:6px;margin-bottom:10px}
+.rp-head h1{font-size:20pt;line-height:1.1;margin:0;color:#0b3d91;letter-spacing:-.3px}
+.rp-head p{margin:2px 0 0;color:#444;font-size:10pt}
+.rp-head .rp-who{text-align:right;font-size:10pt;color:#222}
+.rp-head .rp-who b{font-size:12pt}
+#report h2{font-size:12.5pt;color:#0b3d91;margin:14px 0 6px}
+#report table{width:100%;border-collapse:collapse;font-size:9.5pt}
+#report th{text-align:left;font-weight:600;color:#0b3d91;background:#eef3fb;padding:5px 6px;border-bottom:1px solid #b8c7e3}
+#report td{padding:5px 6px;border-bottom:1px solid #dde3ee;vertical-align:top}
+#report tr{break-inside:avoid}
+#report td.c,#report th.c{text-align:center}
+#report td.n{font-variant-numeric:tabular-nums;white-space:nowrap}
+#report .plan td.c{font-size:11pt;font-weight:700;width:11mm}
+#report .charts{display:grid;grid-template-columns:1fr 1fr;gap:8mm;break-inside:avoid}
+#report .charts h2{margin-top:6px}
+#report .sub{color:#555;font-size:8.5pt}
+#report .kp{display:flex;gap:8px;margin:6px 0 4px}
+#report .kp div{flex:1;border:1px solid #c9d6ee;border-radius:8px;padding:6px 8px}
+#report .kp b{display:block;font-size:15pt;color:#0b3d91;font-variant-numeric:tabular-nums}
+#report .kp span{font-size:8.5pt;color:#444}
+#report .chart{margin:4px 0 0;break-inside:avoid}
+#report .chart .hit,#report .chart .xh,#report .tip{display:none}
+#report .legend{font-size:8.5pt;color:#333}
+#report .flag{color:#c8102e;font-weight:700}
+#report .warn{color:#a14800;font-weight:600}
+#report .foot{margin-top:14px;padding-top:6px;border-top:1px solid #ccd;font-size:8pt;color:#555}
+#report .nw{columns:2;column-gap:18px;font-size:9pt}
+#report .nw div{break-inside:avoid;margin-bottom:6px}
+#report .nw b{color:#0b3d91}
+.printrow{display:grid;grid-template-columns:1fr;gap:var(--space-2)}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}.anim{opacity:1;transform:none}}
 </style>
 </head>
@@ -315,6 +354,7 @@ textarea.copy{width:100%;min-height:160px;border:0;border-radius:var(--radius-md
   <symbol id="i-noon" viewBox="0 0 24 24"><circle cx="12" cy="14" r="4"/><path d="M12 3v4M5 9l2 2M19 9l-2 2M3 18h18"/></symbol>
   <symbol id="i-sunset" viewBox="0 0 24 24"><path d="M17 18a5 5 0 0 0-10 0M12 9V2M4.2 10.2l1.4 1.4M1 18h2M21 18h2M18.4 11.6l1.4-1.4M23 22H1M16 5l-4 4-4-4"/></symbol>
   <symbol id="i-moon" viewBox="0 0 24 24"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></symbol>
+  <symbol id="i-print" viewBox="0 0 24 24"><path d="M6 9V3h12v6"/><rect x="3" y="9" width="18" height="8" rx="2"/><path d="M6 14h12v7H6z"/></symbol>
   <symbol id="i-cal" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="3"/><path d="M16 2v4M8 2v4M3 10h18"/></symbol>
 </svg>
 
@@ -406,6 +446,11 @@ textarea.copy{width:100%;min-height:160px;border:0;border-radius:var(--radius-md
   </div>
   <div class="sheet__body">
     <div class="group" id="fileState"></div>
+    <p class="sh">Für Ausdrucke</p>
+    <div class="group">
+      <div class="field"><label for="f-ptname">Name auf dem PDF</label><input id="f-ptname" autocomplete="name" placeholder="Vorname Nachname"></div>
+      <div class="field"><label for="f-ptgeb">Geburtsdatum (freiwillig)</label><input id="f-ptgeb" type="date"></div>
+    </div>
     <p class="sh">JSON-Datei</p>
     <div class="group">
       <button type="button" class="btn btn--filled btn--block" id="btnSave"><svg class="i"><use href="#i-save"/></svg>In Datei sichern</button>
@@ -452,6 +497,7 @@ textarea.copy{width:100%;min-height:160px;border:0;border-radius:var(--radius-md
   </form>
 </dialog>
 
+<div id="report"></div>
 <div class="toast glass" id="toast" role="status"><svg class="i"><use href="#i-checkc"/></svg><span></span></div>
 
 <script id="startdaten" type="application/json">{"app": "Medikamentenplan", "version": 2, "geaendert": "2026-11-02", "einstellungen": {"vorlaufTage": 14}, "medikamente": [], "messungen": []}</script>
@@ -771,6 +817,7 @@ textarea.copy{width:100%;min-height:160px;border:0;border-radius:var(--radius-md
       </article>`).join("") : `<div class="empty glass"><p class="title2" style="color:var(--ink)">Willkommen</p><p class="muted">Öffnen Sie Ihre Datei «medikamente.json» oder erfassen Sie ein Medikament.</p>
         <div style="display:grid;gap:var(--space-2);margin-top:var(--space-5)"><button type="button" class="btn btn--filled btn--block" id="emptyOpen"><svg class="i"><use href="#i-open"/></svg>Datei öffnen</button>
         <button type="button" class="btn btn--block" id="emptyAdd"><svg class="i"><use href="#i-plus"/></svg>Medikament hinzufügen</button></div></div>`}
+      ${list.length ? `<button type="button" class="btn btn--block glass" data-print="meds"><svg class="i"><use href="#i-print"/></svg>Medikamentenplan als PDF</button>` : ""}
       <p class="note">Angaben zu Wirkung und Nebenwirkungen ersetzen keine ärztliche Beratung. Dosis gemäss Rezept bzw. Medikamentenplan.</p>`;
 
     // Bestellen
@@ -1031,7 +1078,7 @@ textarea.copy{width:100%;min-height:160px;border:0;border-radius:var(--radius-md
     }
   });
   $("#btnAdd").addEventListener("click", () => page === 2 ? openBP(null) : openMed(null));
-  $("#btnData").addEventListener("click", () => { $("#jsonBox").hidden = true; $("#resetConfirm").classList.remove("show"); renderFileState(); openSheet($("#sheetData")); });
+  $("#btnData").addEventListener("click", () => { $("#f-ptname").value = data.einstellungen.name || ""; $("#f-ptgeb").value = data.einstellungen.geburtsdatum || ""; $("#jsonBox").hidden = true; $("#resetConfirm").classList.remove("show"); renderFileState(); openSheet($("#sheetData")); });
   const top = $("#top");
   addEventListener("scroll", () => top.classList.toggle("scrolled", scrollY > 50), { passive: true });
   document.addEventListener("visibilitychange", () => { if (!document.hidden) render(); });
@@ -1213,6 +1260,7 @@ textarea.copy{width:100%;min-height:160px;border:0;border-radius:var(--radius-md
         <ul class="list glass">${rs.map(r => { const c = bpCls(r.sys, r.dia), pc = pulsCls(r.puls); return `<li><button type="button" class="row bprow" data-bpedit="${esc(r.id)}">
           <span class="tm">${hhmm(tOf(r))}</span><span class="ttl"><span class="bv">${r.sys}/${r.dia}<small>${r.puls ? "Puls " + r.puls + (pc ? " (" + pc + ")" : "") : ""}</small></span>${r.notiz ? `<small>${esc(r.notiz)}</small>` : ""}</span>${bpPill(c)}</button></li>`; }).join("")}</ul>`).join("") || `<p class="muted" style="padding:0 var(--space-4)">Keine Messungen in den letzten 10 Tagen.</p>`}
       ${listRows.length > shown.length || bpAll ? `<button type="button" class="btn btn--block" data-bp="all">${bpAll ? "Nur letzte 10 Tage" : `Alle ${listRows.length} Messungen anzeigen`}</button>` : ""}
+      <button type="button" class="btn btn--filled btn--block" data-print="bp"><svg class="i"><use href="#i-print"/></svg>Bericht als PDF (${bpRange ? bpRange + " Tage" : "alle"})</button>
       <button type="button" class="btn btn--block" data-bp="copy"><svg class="i"><use href="#i-copy"/></svg>Werte für den Arzt kopieren</button>
       <p class="note">Einteilung nach den europäischen Richtwerten (ESH). Bei Messungen zu Hause gilt ein Durchschnitt ab 135/85 mmHg als erhöht. Ihre persönlichen Zielwerte legt Ihre Ärztin oder Ihr Arzt fest.</p>`;
     bindTs();
@@ -1293,6 +1341,73 @@ textarea.copy{width:100%;min-height:160px;border:0;border-radius:var(--radius-md
       copy(t, "Werte kopiert").then(ok => { if (!ok) { $("#btnData").click(); showJson(t); $("#jsonText").select(); } }); }
   });
 
+  /* =========================================================
+     Ausdruck / PDF
+     ========================================================= */
+  const who = () => (data.einstellungen.name || "").trim();
+  const head = (title, sub) => `<div class="rp-head"><div><h1>${title}</h1><p>${sub}</p></div><div class="rp-who">${who() ? `<b>${esc(who())}</b><br>` : ""}${data.einstellungen.geburtsdatum ? "geb. " + esc(fDate(parse(data.einstellungen.geburtsdatum))) + "<br>" : ""}Erstellt ${today().toLocaleDateString("de-CH")}</div></div>`;
+  function reportMeds() {
+    const list = data.medikamente.filter(m => calc(m).status !== "beendet").sort((a, b) => a.name.localeCompare(b.name));
+    const ended = data.medikamente.filter(m => calc(m).status === "beendet");
+    const fd = v => (+v ? fNum(+v).replace(".5", "½").replace(/^0½$/, "½") : "–");
+    const rows = list.map(m => { const c = calc(m); return `<tr>
+      <td><b>${esc(m.name)}</b> ${esc(m.staerke)}<div class="sub">${esc(m.wirkstoff)}</div></td>
+      ${["morgens", "mittags", "abends", "nacht"].map(k => `<td class="c">${fd(m.dosis[k])}</td>`).join("")}
+      <td>${esc(m.einsatz)}${m.einnahmeBis ? `<div class="sub">bis ${fDate(parse(m.einnahmeBis))}</div>` : ""}</td>
+      <td class="n">${fNum(c.vorrat)} Stk.${c.reichtBis ? `<div class="sub">reicht bis ${fDate(c.reichtBis)}</div>` : ""}</td></tr>`; }).join("");
+    return head("Medikamentenplan", `Stand ${today().toLocaleDateString("de-CH", { day: "numeric", month: "long", year: "numeric" })} · ${list.length} Medikamente`) + `
+      <table class="plan"><thead><tr><th>Medikament</th><th class="c">Morgens</th><th class="c">Mittags</th><th class="c">Abends</th><th class="c">Nacht</th><th>Wofür</th><th>Vorrat</th></tr></thead><tbody>${rows || `<tr><td colspan="7">Keine Medikamente erfasst.</td></tr>`}</tbody></table>
+      <p class="sub">Angaben in Tabletten. ½ = halbe Tablette.</p>
+      ${ended.length ? `<h2>Abgesetzt</h2><p>${ended.map(m => `${esc(m.name)} ${esc(m.staerke)} (bis ${fDate(parse(m.einnahmeBis))})`).join(" · ")}</p>` : ""}
+      ${list.some(m => m.nebenwirkungen.length) ? `<h2>Mögliche Nebenwirkungen</h2><div class="nw">${list.filter(m => m.nebenwirkungen.length).map(m => `<div><b>${esc(m.name)}</b><br>${m.nebenwirkungen.map(esc).join(" · ")}</div>`).join("")}</div>` : ""}
+      <div class="foot">Eigene Aufstellung des Patienten. Massgebend sind Rezept und ärztlicher Medikamentenplan.</div>`;
+  }
+  function reportBP() {
+    const rows = bpRows(bpRange);
+    const label = bpRange ? `letzte ${bpRange} Tage` : "alle Messungen";
+    const from = rows.length ? tOf(rows[0]) : null, to = rows.length ? tOf(rows.at(-1)) : null;
+    let h = head("Blutdruck und Puls", `${label}${from ? ` · ${from.toLocaleDateString("de-CH")} bis ${to.toLocaleDateString("de-CH")}` : ""} · ${rows.length} Messungen${rows.some(r => r.demo) ? " · BEISPIELWERTE" : ""}`);
+    if (!rows.length) return h + "<p>Keine Messungen in diesem Zeitraum.</p>";
+    const S = avg(rows.map(r => r.sys)), D = avg(rows.map(r => r.dia)), P = avg(rows.map(r => r.puls).filter(Boolean));
+    const sl = k => { const rs = rows.filter(r => slotOf(tOf(r)) === k); return rs.length ? `${r0(avg(rs.map(r => r.sys)))}/${r0(avg(rs.map(r => r.dia)))}` : "–"; };
+    const over = rows.filter(r => r.sys >= 135 || r.dia >= 85).length;
+    const top = rows.reduce((b, r) => (r.sys > b.sys ? r : b), rows[0]);
+    h += `<div class="kp">
+      <div><b>${r0(S)}/${r0(D)}</b><span>Durchschnitt mmHg · ${bpCls(Math.round(S), Math.round(D)).l}</span></div>
+      <div><b>${P ? r0(P) : "–"}</b><span>Puls Durchschnitt</span></div>
+      <div><b>${sl("morgens")}</b><span>Morgens Ø</span></div>
+      <div><b>${sl("abends")}</b><span>Abends Ø</span></div>
+      <div><b>${Math.round(over / rows.length * 100)} %</b><span>ab 135/85 (${over} von ${rows.length})</span></div></div>
+      <p class="sub">Höchster Wert: ${top.sys}/${top.dia} mmHg am ${tOf(top).toLocaleDateString("de-CH")} um ${hhmm(tOf(top))} Uhr.</p>`;
+    tsBind = [];
+    h += `<div class="charts"><div><h2>Verlauf Blutdruck (mmHg)</h2>` + tsChart("rpBp", rows, [{ k: "sys", c: SYS_C, name: "Oberer Wert (SYS)", short: "SYS" }, { k: "dia", c: DIA_C, name: "Unterer Wert (DIA)", short: "DIA" }], [{ v: 135 }, { v: 85 }], bpRange, () => "");
+    h += `</div><div>`;
+    if (rows.some(r => r.puls)) h += `<h2>Verlauf Puls</h2>` + tsChart("rpP", rows.filter(r => r.puls), [{ k: "puls", c: PUL_C, name: "Puls", short: "Puls" }], [], bpRange, () => "").replace(/<span><i style="background:none[^]*?Grenzwert zu Hause<\/span>/, "");
+    h += `</div></div>`;
+    tsBind = [];
+    h += `<h2>Alle Messungen</h2><table><thead><tr><th>Datum</th><th>Zeit</th><th class="c">SYS</th><th class="c">DIA</th><th class="c">Puls</th><th>Einteilung</th><th>Notiz</th></tr></thead><tbody>` +
+      rows.slice().reverse().map(r => { const c = bpCls(r.sys, r.dia), t = tOf(r);
+        return `<tr><td class="n">${t.toLocaleDateString("de-CH", { weekday: "short", day: "2-digit", month: "2-digit", year: "numeric" })}</td><td class="n">${hhmm(t)}</td>
+        <td class="c n${r.sys >= 135 ? " flag" : ""}">${r.sys}</td><td class="c n${r.dia >= 85 ? " flag" : ""}">${r.dia}</td><td class="c n${pulsCls(r.puls) ? " warn" : ""}">${r.puls || "–"}</td>
+        <td>${c.l}</td><td>${esc(r.notiz)}</td></tr>`; }).join("") + `</tbody></table>
+      <div class="foot">Rot markiert: Werte ab 135 (oben) bzw. 85 (unten), dem Grenzwert für Messungen zu Hause. Einteilung nach ESH-Richtwerten. Selbstmessung des Patienten.</div>`;
+    return h;
+  }
+  function printReport(kind) {
+    const rp = $("#report");
+    rp.innerHTML = kind === "bp" ? reportBP() : reportMeds();
+    const t = document.title;
+    document.title = (kind === "bp" ? "Blutdruck " : "Medikamentenplan ") + iso(today());
+    setTimeout(() => {
+      try { window.print(); } catch { toast("Drucken ist hier nicht möglich"); }
+      setTimeout(() => { document.title = t; }, 1000);
+    }, 50);
+  }
+  document.addEventListener("click", e => {
+    const p = e.target.closest("[data-print]"); if (p) printReport(p.dataset.print);
+  });
+  $("#f-ptname").addEventListener("change", e => { data.einstellungen.name = e.target.value.trim(); persist(); });
+  $("#f-ptgeb").addEventListener("change", e => { data.einstellungen.geburtsdatum = e.target.value || ""; persist(); });
   document.addEventListener("click", e => { if (e.target.closest("#emptyOpen")) openFile(); else if (e.target.closest("#emptyAdd")) openMed(null); });
   load(); render();
 })();
