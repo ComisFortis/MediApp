@@ -323,6 +323,53 @@ textarea.copy{width:100%;min-height:160px;border:0;border-radius:var(--radius-md
 #report .nw div{break-inside:avoid;margin-bottom:6px}
 #report .nw b{color:#0b3d91}
 .printrow{display:grid;grid-template-columns:1fr;gap:var(--space-2)}
+/* Herz-Monitor */
+.hm{position:relative;overflow:hidden;border-radius:var(--radius-lg);padding:var(--space-4);color:#e9edff;
+  background:radial-gradient(120% 90% at 20% 60%,#1b2a66 0%,#0d1838 45%,#070d22 100%);box-shadow:0 14px 40px rgba(7,16,45,.35),inset 0 1px 0 rgba(255,255,255,.08)}
+.hm::after{content:"";position:absolute;inset:0;pointer-events:none;background:repeating-linear-gradient(0deg,rgba(255,255,255,.025) 0 1px,transparent 1px 4px)}
+.hm-top{display:flex;justify-content:space-between;align-items:flex-start;gap:var(--space-2);position:relative;z-index:1}
+.hm-live{display:flex;align-items:center;gap:6px;font-size:11px;letter-spacing:1.2px;font-weight:700;color:#ff8da0;text-transform:uppercase}
+.hm-live i{width:7px;height:7px;border-radius:50%;background:#ff4f6d;box-shadow:0 0 8px #ff4f6d;animation:blink 1.6s ease-in-out infinite}
+@keyframes blink{50%{opacity:.25}}
+.hm-when{font-size:12px;color:#9aa6cf;margin-top:2px}
+.hm-bp{font-size:30px;line-height:34px;font-weight:700;letter-spacing:-.5px;margin-top:8px;font-variant-numeric:tabular-nums;color:#fff}
+.hm-bp small{font-size:13px;color:#9aa6cf;font-weight:600;margin-left:4px;letter-spacing:0}
+.hm-tag{display:inline-flex;align-items:center;gap:6px;margin-top:6px;padding:3px 10px;border-radius:999px;font-size:12px;font-weight:600;background:rgba(69,224,192,.12);color:#6ff0d2;border:1px solid rgba(69,224,192,.25)}
+.hm-tag.w{background:rgba(255,184,77,.12);color:#ffc874;border-color:rgba(255,184,77,.3)}
+.hm-tag.d{background:rgba(255,93,115,.14);color:#ff9aa9;border-color:rgba(255,93,115,.35)}
+.hm-tag i{width:6px;height:6px;border-radius:50%;background:currentColor}
+.hm-rate{text-align:right}
+.hm-rate p{margin:0;font-size:11px;letter-spacing:1.2px;font-weight:700;color:#ff8da0;display:flex;align-items:center;gap:5px;justify-content:flex-end}
+.hm-rate p svg{width:13px;height:13px;fill:#ff5d73;stroke:none;animation:beat var(--beat,1s) infinite}
+.hm-rate b{display:block;font-size:54px;line-height:56px;font-weight:300;letter-spacing:-2px;color:#fff;font-variant-numeric:tabular-nums}
+.hm-rate span{font-size:13px;color:#9aa6cf}
+.hm-mid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:var(--space-3);align-items:center;position:relative;z-index:1;margin-top:var(--space-3)}
+.hm-heart{position:relative}
+.hm-heart svg{display:block;width:100%;height:auto;overflow:visible}
+.hm-heart .beat{transform-box:fill-box;transform-origin:50% 60%;animation:beat var(--beat,1s) cubic-bezier(.3,.7,.3,1) infinite;filter:drop-shadow(0 0 6px rgba(167,139,255,.55))}
+.hm-heart .halo{transform-box:fill-box;transform-origin:center;animation:halo var(--beat,1s) ease-out infinite}
+@keyframes beat{0%{transform:scale(1)}10%{transform:scale(1.075)}20%{transform:scale(.985)}30%{transform:scale(1.035)}48%,100%{transform:scale(1)}}
+@keyframes halo{0%{opacity:.55;transform:scale(.9)}70%,100%{opacity:0;transform:scale(1.25)}}
+.hm-heart .flow{stroke-dasharray:4 10;animation:flow 1.2s linear infinite}
+@keyframes flow{to{stroke-dashoffset:-28}}
+.hm-call{position:absolute;font-size:9.5px;line-height:12px;letter-spacing:.8px;font-weight:700;color:#c7cff5;text-transform:uppercase;white-space:nowrap}
+.hm-call em{display:block;font-style:normal;font-weight:500;letter-spacing:0;text-transform:none;color:#8f9bc6;font-size:11px}
+.hm-traces{display:grid;gap:var(--space-3)}
+.hm-tr p{margin:0 0 2px;font-size:10px;letter-spacing:1px;font-weight:700;color:#8f9bc6;display:flex;justify-content:space-between}
+.hm-tr .strip{height:58px;overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 18%,#000 88%,transparent);mask-image:linear-gradient(90deg,transparent,#000 18%,#000 88%,transparent)}
+.hm-tr svg{display:block;height:58px;width:200%;animation:scroll var(--dur,3s) linear infinite}
+@keyframes scroll{to{transform:translateX(-50%)}}
+.hm-tr.ecg path{stroke:#ff5d73;filter:drop-shadow(0 0 3px rgba(255,93,115,.8))}
+.hm-tr.pleth path{stroke:#45e0c0;filter:drop-shadow(0 0 3px rgba(69,224,192,.8))}
+.hm-foot{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;margin-top:var(--space-3);position:relative;z-index:1;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:8px 10px}
+.hm-foot div{font-size:10px;letter-spacing:.8px;color:#8f9bc6;font-weight:700}
+.hm-foot b{display:block;font-size:17px;letter-spacing:0;color:#fff;font-variant-numeric:tabular-nums}
+.hm-foot b small{font-size:11px;color:#8f9bc6;font-weight:500;margin-left:2px}
+.hm-legend{display:flex;gap:12px;margin-top:10px;font-size:11px;color:#8f9bc6;position:relative;z-index:1;flex-wrap:wrap}
+.hm-legend span{display:inline-flex;align-items:center;gap:5px}
+.hm-legend i{width:7px;height:7px;border-radius:50%}
+@media (prefers-reduced-motion:reduce){.hm *{animation:none!important}}
+@media print{.hm{display:none}}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}.anim{opacity:1;transform:none}}
 </style>
 </head>
@@ -370,19 +417,19 @@ textarea.copy{width:100%;min-height:160px;border:0;border-radius:var(--radius-md
     <p class="sub" id="today"></p>
   </div>
   <div class="pager" id="pager">
-    <section class="page" id="p0" aria-label="Übersicht"></section>
-    <section class="page" id="p1" aria-label="Nachbestellen"></section>
-    <section class="page" id="p2" aria-label="Blutdruck"></section>
-    <section class="page" id="p3" aria-label="Verlauf"></section>
+    <section class="page" id="pVorrat" aria-label="Vorrat"></section>
+    <section class="page" id="pUeber" aria-label="Übersicht"></section>
+    <section class="page" id="pBlut" aria-label="Blutdruck"></section>
+    <section class="page" id="pBest" aria-label="Nachbestellen"></section>
   </div>
 </div>
 
 <nav class="tabbar glass" role="tablist" aria-label="Ansicht">
   <i class="ind" id="ind"></i>
-  <button type="button" role="tab" aria-selected="true" data-tab="0"><svg class="i"><use href="#i-grid"/></svg>Übersicht</button>
-  <button type="button" role="tab" aria-selected="false" data-tab="1"><svg class="i"><use href="#i-cart"/></svg>Bestellen</button>
+  <button type="button" role="tab" aria-selected="false" data-tab="0"><svg class="i"><use href="#i-chart"/></svg>Vorrat</button>
+  <button type="button" role="tab" aria-selected="true" data-tab="1"><svg class="i"><use href="#i-grid"/></svg>Übersicht</button>
   <button type="button" role="tab" aria-selected="false" data-tab="2"><svg class="i"><use href="#i-heart"/></svg>Blutdruck</button>
-  <button type="button" role="tab" aria-selected="false" data-tab="3"><svg class="i"><use href="#i-chart"/></svg>Vorrat</button>
+  <button type="button" role="tab" aria-selected="false" data-tab="3"><svg class="i"><use href="#i-cart"/></svg>Bestellen</button>
 </nav>
 
 <!-- Medikament -->
@@ -781,7 +828,7 @@ textarea.copy{width:100%;min-height:160px;border:0;border-radius:var(--radius-md
     const dly = firstRender && !reduce;
     const A = i => dly ? ` anim" style="--d:${i}` : "";
 
-    $("#p0").innerHTML = `
+    $("#pUeber").innerHTML = `
       <section class="card glass${A(0)}" aria-live="polite">
         <p class="eyebrow"><svg class="i"><use href="#i-${eb}"/></svg>${ebt}</p>
         <p class="title2">${esc(title)}</p><p class="muted">${esc(text)}</p>
@@ -826,7 +873,7 @@ textarea.copy{width:100%;min-height:160px;border:0;border-radius:var(--radius-md
       ["Später", list.filter(x => x.c.status === "ok")],
       ["Keine Bestellung nötig", list.filter(x => ["deckt", "beendet", "keine"].includes(x.c.status))]
     ].filter(g => g[1].length);
-    $("#p1").innerHTML = groups.map(([h, items], gi) => `
+    $("#pBest").innerHTML = groups.map(([h, items], gi) => `
       <p class="list-header">${h}</p>
       <ul class="list glass">${items.map(({ m, c }) => `
         <li><button type="button" class="row" data-edit="${esc(m.id)}">${iconFor(m)}
@@ -840,7 +887,7 @@ textarea.copy{width:100%;min-height:160px;border:0;border-radius:var(--radius-md
     // Verlauf
     const totalDay = list.reduce((s, x) => s + (["beendet"].includes(x.c.status) ? 0 : x.c.tag), 0);
     const slotSum = SLOTS.map(([k]) => list.reduce((s, x) => s + (x.c.status === "beendet" ? 0 : (+x.m.dosis[k] || 0)), 0));
-    $("#p3").innerHTML = `
+    $("#pVorrat").innerHTML = `
       <section class="card glass${A(0)}">
         <p class="eyebrow"><svg class="i"><use href="#i-cal"/></svg>Reichweite ab heute</p>
         <p class="title2">${first ? `Zuerst leer: ${esc(first.m.name)}` : "Reichweite"}</p>
@@ -887,8 +934,9 @@ textarea.copy{width:100%;min-height:160px;border:0;border-radius:var(--radius-md
 
   /* ---------- Pager & Tab-Leiste ---------- */
   const pager = $("#pager"), ind = $("#ind"), tabs = [...document.querySelectorAll("[data-tab]")];
-  let page = 0;
-  function sizePager() { const p = $("#p" + page); pager.style.height = p.scrollHeight + "px"; }
+  const PAGES = ["pVorrat", "pUeber", "pBlut", "pBest"];
+  let page = 1;
+  function sizePager() { const p = $("#" + PAGES[Math.max(0, page)]); pager.style.height = p.scrollHeight + "px"; }
   function onScroll() {
     const w = pager.clientWidth || 1, f = pager.scrollLeft / w;
     ind.style.transform = `translateX(${f * tabs[0].offsetWidth}px)`;
@@ -897,7 +945,7 @@ textarea.copy{width:100%;min-height:160px;border:0;border-radius:var(--radius-md
       page = p;
       tabs.forEach((t, i) => t.setAttribute("aria-selected", i === p));
       sizePager();
-      const sec = $("#p" + p);
+      const sec = $("#" + PAGES[p]);
       if (!reduce) { sec.querySelectorAll(".gbar").forEach(b => { b.style.animation = "none"; b.offsetWidth; b.style.animation = ""; }); }
     }
   }
@@ -1181,11 +1229,88 @@ textarea.copy{width:100%;min-height:160px;border:0;border-radius:var(--radius-md
   }
 
   /* ---------- Ansicht ---------- */
+  /* ---------- Herz-Monitor ---------- */
+  function wavePath(kind, w, h, n) {
+    // eine Periode = w Einheiten, n Perioden
+    let d = "", b = h * .62;
+    for (let i = 0; i < n; i++) {
+      const x = i * w, X = f => (x + f * w).toFixed(1), Y = v => (b - v * h).toFixed(1);
+      if (kind === "ecg") {
+        d += `${i ? "L" : "M"}${X(0)},${Y(0)} L${X(.14)},${Y(0)} Q${X(.19)},${Y(.1)} ${X(.24)},${Y(0)} L${X(.32)},${Y(0)} L${X(.35)},${Y(-.07)} L${X(.39)},${Y(.58)} L${X(.43)},${Y(-.2)} L${X(.46)},${Y(0)} L${X(.58)},${Y(0)} Q${X(.66)},${Y(.17)} ${X(.74)},${Y(0)} L${X(1)},${Y(0)}`;
+      } else {
+        d += `${i ? "L" : "M"}${X(0)},${Y(-.05)} C${X(.1)},${Y(-.05)} ${X(.14)},${Y(.55)} ${X(.22)},${Y(.55)} C${X(.3)},${Y(.55)} ${X(.36)},${Y(.2)} ${X(.42)},${Y(.17)} Q${X(.47)},${Y(.24)} ${X(.53)},${Y(.2)} C${X(.65)},${Y(.12)} ${X(.85)},${Y(-.03)} ${X(1)},${Y(-.05)}`;
+      }
+    }
+    return d;
+  }
+  function heartSVG() {
+    const body = "M70 80 C46 82 32 102 34 128 C36 152 52 170 76 186 C98 200 118 208 134 213 C143 215 149 208 151 199 C159 168 174 138 176 112 C178 86 162 70 140 70 C122 70 110 76 102 84 C92 78 82 78 70 80 Z";
+    let mesh = "";
+    for (let y = 64; y < 216; y += 9) mesh += `<path d="M20 ${y} Q104 ${y + 14 + (y - 140) * .08} 190 ${y}"/>`;
+    for (let x = 30; x < 186; x += 13) mesh += `<path d="M${x} 56 Q${104 + (x - 104) * 1.25} 140 ${104 + (x - 104) * .25} 220"/>`;
+    const tube = (d, w) => `<path d="${d}" stroke="rgba(185,166,255,.85)" stroke-width="${w}" fill="none" stroke-linecap="round"/><path d="${d}" stroke="#0d1838" stroke-width="${w - 2.6}" fill="none" stroke-linecap="round"/><path d="${d}" stroke="rgba(185,166,255,.35)" stroke-width="${w - 2.6}" stroke-dasharray="1.2 4.5" fill="none"/>`;
+    return `<svg viewBox="0 0 210 240" aria-hidden="true">
+      <defs><clipPath id="hmClip"><path d="${body}"/></clipPath>
+        <radialGradient id="hmFill" cx="45%" cy="55%" r="60%"><stop offset="0" stop-color="#7b5cff" stop-opacity=".35"/><stop offset="1" stop-color="#3a2a8f" stop-opacity=".05"/></radialGradient>
+        <radialGradient id="hmBase" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#8fb4ff" stop-opacity=".35"/><stop offset="1" stop-color="#8fb4ff" stop-opacity="0"/></radialGradient></defs>
+      <ellipse cx="104" cy="226" rx="78" ry="12" fill="url(#hmBase)"/>
+      <ellipse class="halo" cx="104" cy="226" rx="70" ry="10" fill="none" stroke="#8fb4ff" stroke-width="1"/>
+      <ellipse cx="104" cy="226" rx="52" ry="7" fill="none" stroke="rgba(143,180,255,.4)" stroke-width=".8"/>
+      <g class="beat">
+        ${tube("M86 74 C84 50 88 24 112 18 C138 12 158 26 158 52 L158 70", 15)}
+        ${tube("M118 76 C122 56 126 44 120 34 C112 22 84 26 64 34", 12)}
+        ${tube("M58 100 L56 30", 11)}
+        <path d="${body}" fill="url(#hmFill)"/>
+        <g clip-path="url(#hmClip)" stroke="rgba(185,166,255,.42)" stroke-width=".7" fill="none">${mesh}</g>
+        <path d="${body}" fill="none" stroke="#c4b5ff" stroke-width="1.5"/>
+        <path d="M150 84 C168 80 176 92 170 102 C166 96 158 94 150 96 Z" fill="rgba(123,92,255,.3)" stroke="#c4b5ff" stroke-width="1.2"/>
+        <path class="flow" d="M108 86 C116 120 126 165 140 205" fill="none" stroke="#ff5d73" stroke-width="1.6" stroke-linecap="round"/>
+        <path class="flow" d="M62 92 C48 120 54 150 80 178" fill="none" stroke="#6aa8ff" stroke-width="1.4" stroke-linecap="round" style="animation-duration:1.6s"/>
+        <circle cx="132" cy="176" r="3" fill="#fff" opacity=".9"/>
+      </g>
+    </svg>`;
+  }
+  function heartPanel() {
+    const all = data.messungen.slice().sort((a, b) => tOf(b) - tOf(a));
+    const last = all[0], lastP = all.find(r => r.puls);
+    const puls = lastP ? lastP.puls : null;
+    const bpm = Math.min(150, Math.max(40, puls || 66)), beat = 60 / bpm;
+    const c = last ? bpCls(last.sys, last.dia) : null;
+    const tag = c ? `<span class="hm-tag ${c.t === "danger" ? "d" : c.t === "warning" ? "w" : ""}"><i></i>${c.l}</span>` : `<span class="hm-tag"><i></i>Noch keine Messung</span>`;
+    const r7 = bpRows(7);
+    const a7 = r7.length ? `${r0(avg(r7.map(r => r.sys)))}/${r0(avg(r7.map(r => r.dia)))}` : "–";
+    const W = 60, N = 6; // 3 Perioden sichtbar, 6 gezeichnet
+    return `<section class="hm" style="--beat:${beat.toFixed(3)}s;--dur:${(beat * 3).toFixed(3)}s" aria-label="Letzte Messung${last ? `: ${last.sys} zu ${last.dia}, Puls ${puls || "unbekannt"}` : ""}">
+      <div class="hm-top">
+        <div>
+          <div class="hm-live"><i></i>Letzte Messung</div>
+          <div class="hm-when">${last ? `${tOf(last).toLocaleDateString("de-CH", { weekday: "long", day: "numeric", month: "long" })} · ${hhmm(tOf(last))} Uhr` : "Erfassen Sie Ihre erste Messung"}</div>
+          <div class="hm-bp">${last ? `${last.sys}/${last.dia}<small>mmHg</small>` : "–/–"}</div>
+          ${tag}
+        </div>
+        <div class="hm-rate"><p><svg viewBox="0 0 24 24"><path d="M12 21 4.6 13.6A5 5 0 0 1 12 7a5 5 0 0 1 7.4 6.6z"/></svg>Puls</p><b>${puls || "–"}</b><span>pro Minute</span></div>
+      </div>
+      <div class="hm-mid">
+        <div class="hm-heart">${heartSVG()}
+        </div>
+        <div class="hm-traces">
+          <div class="hm-tr ecg"><p><span>HERZSCHLAG</span><span>${bpm} /MIN</span></p><div class="strip"><svg viewBox="0 0 ${W * N} 58" preserveAspectRatio="none"><path d="${wavePath("ecg", W, 50, N)}" fill="none" stroke-width="1.8" stroke-linejoin="round" vector-effect="non-scaling-stroke"/></svg></div></div>
+          <div class="hm-tr pleth"><p><span>PULSWELLE</span><span></span></p><div class="strip"><svg viewBox="0 0 ${W * N} 58" preserveAspectRatio="none"><path d="${wavePath("pleth", W, 50, N)}" fill="none" stroke-width="1.8" stroke-linejoin="round" vector-effect="non-scaling-stroke"/></svg></div></div>
+        </div>
+      </div>
+      <div class="hm-foot">
+        <div>Ø 7 TAGE<b>${a7}</b></div>
+        <div>MESSUNGEN<b>${r7.length}<small>/7 T.</small></b></div>
+        <div>HEUTE<b>${bpRows(1).length}<small>×</small></b></div>
+      </div>
+      <div class="hm-legend"><span><i style="background:#ff5d73"></i>Herzschlag im Takt Ihres Pulses</span><span><i style="background:#45e0c0"></i>Pulswelle</span></div>
+    </section>`;
+  }
   function renderBP() {
-    const el = $("#p2");
+    const el = $("#pBlut");
     const hasDemo = data.messungen.some(m => m.demo);
     if (!data.messungen.length) {
-      el.innerHTML = `<section class="card glass empty-bp">
+      el.innerHTML = heartPanel() + `<section class="card glass empty-bp">
         <span class="app-ic" style="--ic1:#2a63c4;--ic2:#0b3d91"><svg class="i"><use href="#i-heart"/></svg></span>
         <p class="title2">Blutdruck und Puls</p>
         <p class="muted">Erfassen Sie mehrere Messungen am Tag. Die App wertet sie aus und zeigt den Verlauf als Grafik.</p>
@@ -1230,6 +1355,7 @@ textarea.copy{width:100%;min-height:160px;border:0;border-radius:var(--radius-md
     el.innerHTML = `
       ${hasDemo ? `<div class="demo"><svg class="i"><use href="#i-alert"/></svg>Beispielwerte<button type="button" data-bp="undemo">Entfernen</button></div>` : ""}
       ${recent.length ? `<div class="warnbox"><svg class="i"><use href="#i-alert"/></svg><span>In den letzten 7 Tagen gab es ${recent.length === 1 ? "einen Wert" : recent.length + " Werte"} ab 180/110. Bei solchen Werten mit Beschwerden wie Brustschmerz, Atemnot, Sehstörungen oder Lähmungen sofort 144 anrufen. Sonst bald mit der Ärztin oder dem Arzt besprechen.</span></div>` : ""}
+      ${heartPanel()}
       <div class="bpseg" role="group" aria-label="Zeitraum">${[[7, "7 Tage"], [30, "30 Tage"], [90, "90 Tage"], [0, "Alle"]].map(([v, l]) => `<button type="button" data-range="${v}" aria-pressed="${bpRange === v}">${l}</button>`).join("")}</div>
       <section class="card glass${dly ? ' anim" style="--d:0' : ""}">
         <p class="eyebrow"><svg class="i"><use href="#i-heart"/></svg>Durchschnitt ${label}</p>
@@ -1410,6 +1536,8 @@ textarea.copy{width:100%;min-height:160px;border:0;border-radius:var(--radius-md
   $("#f-ptgeb").addEventListener("change", e => { data.einstellungen.geburtsdatum = e.target.value || ""; persist(); });
   document.addEventListener("click", e => { if (e.target.closest("#emptyOpen")) openFile(); else if (e.target.closest("#emptyAdd")) openMed(null); });
   load(); render();
+  pager.scrollLeft = pager.clientWidth; ind.style.transform = `translateX(${tabs[0].offsetWidth}px)`; sizePager();
+  addEventListener("load", () => { if (page === 1) pager.scrollLeft = pager.clientWidth; });
 })();
 if ("serviceWorker" in navigator && location.protocol === "https:") navigator.serviceWorker.register("sw.js").catch(() => {});
 </script>
